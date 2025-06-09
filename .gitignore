@@ -1,0 +1,58 @@
+# Root .gitignore for nvocc-ai-agent
+
+# === Python backend ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+.env
+.env.*
+venv/
+.envrc
+
+# === Docker ===
+*.log
+docker-compose.override.yml
+*.pid
+*.sock
+
+# === FastAPI app logs ===
+logs/
+
+# === SQLAlchemy migration files ===
+migrations/
+
+# === Frontend Node/Vite ===
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+frontend/.vite/
+frontend/.turbo/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# === OS ===
+.DS_Store
+Thumbs.db
+
+# === IDE ===
+.vscode/
+.idea/
+*.iml
+
+# === General ===
+*.bak
+*.swp
+*.swo
+
+# === Testing artifacts ===
+coverage/
+htmlcov/
+pytest_cache/
+
+# === Package locks (optional) ===
+package-lock.json
