@@ -1,0 +1,70 @@
+.
+├── backend
+│   ├── app
+│   │   ├── __pycache__
+│   │   │   └── main.cpython-310.pyc
+│   │   ├── api
+│   │   │   └── v1
+│   │   ├── db
+│   │   │   ├── database.py
+│   │   │   └── schemas.sql
+│   │   ├── main.py
+│   │   ├── models
+│   │   │   ├── __pycache__
+│   │   │   └── container.py
+│   │   └── services
+│   │       └── maersk_client.py
+│   ├── dockerfile
+│   └── venv
+│       ├── bin
+│       │   ├── activate
+│       │   ├── activate.csh
+│       │   ├── activate.fish
+│       │   ├── Activate.ps1
+│       │   ├── dotenv
+│       │   ├── fastapi
+│       │   ├── normalizer
+│       │   ├── pip
+│       │   ├── pip3
+│       │   ├── pip3.10
+│       │   ├── python -> python3
+│       │   ├── python3 -> /Users/senurirupasinghe/.pyenv/versions/3.10.13/bin/python3
+│       │   ├── python3.10 -> python3
+│       │   ├── tree-cli
+│       │   └── uvicorn
+│       ├── include
+│       ├── lib
+│       │   └── python3.10
+│       └── pyvenv.cfg
+├── docker-compose.yml
+├── frontend
+│   ├── Dockerfile
+│   ├── index.html
+│   ├── nginx
+│   │   └── nginx.conf
+│   ├── node_modules
+│   │   ...
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public
+│   ├── src
+│   │   ├── api
+│   │   │   └── client.ts
+│   │   ├── App.tsx
+│   │   ├── components
+│   │   │   ├── ContainerSearch.tsx
+│   │   │   └── ContainerStatus.tsx
+│   │   ├── index.css
+│   │   ├── main.tsx
+│   │   └── pages
+│   │       └── Dashboard.tsx
+│   ├── tailwind.config.ts
+│   ├── tsconfig.json
+│   └── vite.config.ts
+├── LICENSE
+├── notes.txt
+├── README.md
+└── structure.txt
+
+331 directories, 860 files
