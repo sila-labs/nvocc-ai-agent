@@ -1,8 +1,8 @@
 # app/api/v1/routes.py
 
 from fastapi import APIRouter, HTTPException
-from models.container import ContainerTracking
-from services.maersk_client import MaerskAPIClient
+from app.models.container import ContainerTracking
+from app.services.maersk_client import MaerskAPIClient
 
 router = APIRouter()
 client = MaerskAPIClient()
