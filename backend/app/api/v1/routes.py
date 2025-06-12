@@ -1,7 +1,11 @@
-from fastapi import APIRouter
+# app/api/v1/routes.py
+
+from fastapi import APIRouter, HTTPException
 from models.container import ContainerTracking
+from services.maersk_client import MaerskAPIClient
 
 router = APIRouter()
+client = MaerskAPIClient()
 
 @router.get("/health")
 def health():
@@ -9,10 +13,16 @@ def health():
 
 @router.get("/track/{container_id}", response_model=ContainerTracking)
 def get_container_status(container_id: str):
-    return ContainerTracking(
-        container_number=container_id,
-        carrier="Maersk",
-        status="In Transit",
-        location="Port of Rotterdam",
-        eta="2024-06-15T12:00:00Z"
-    )
+    try:
+        data = client.track_container(container_id)
+
+        # Adapt this mapping depending on Maersk’s actual response schema
+        return ContainerTracking(
+            container_number=data["containerNumber"],
+            carrier="Maersk",
+            status=data["status"],
+            location=data["location"],
+            eta=data["eta"]
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
