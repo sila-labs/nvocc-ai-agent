@@ -35,6 +35,8 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 
+# backend
+backend/app/.env*
 # === OS ===
 .DS_Store
 Thumbs.db
