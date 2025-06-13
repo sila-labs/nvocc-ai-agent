@@ -30,3 +30,12 @@ class MaerskAPIClient:
         response = requests.get(f"{self.track_url}/{container_id}", headers=headers)
         response.raise_for_status()
         return response.json()
+    
+    def get_demurrage(self, container_id: str):
+        if not self.token:
+            self.authenticate()
+        url = f"{self.base_url}/import/demurrage-detention/containers/{container_id}"
+        resp = requests.get(url, headers={"Authorization": f"Bearer {self.token}"})
+        resp.raise_for_status()
+        return resp.json()
+
