@@ -6,9 +6,6 @@ from app.api.v1 import routes
 from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env file
-load_dotenv()
-
 app = FastAPI()
 
 # CORS middleware

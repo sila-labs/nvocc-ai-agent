@@ -1,21 +1,17 @@
-# app/api/v1/routes.py
+# backend/app/api/v1/routes.py
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 import requests
+from typing import Optional
 from app.models.container import ContainerTracking
 from app.services.maersk_client import MaerskAPIClient
 from app.services.maersk_token import MaerskTokenManager
-import os
+from app import config  # ✅ import config variables
+from datetime import date
 
 router = APIRouter()
 client = MaerskAPIClient()
-
-# Ideally load these from environment variables or a config file
-CLIENT_ID = os.getenv("MAERSK_CLIENT_ID", "your_consumer_key")
-CLIENT_SECRET = os.getenv("MAERSK_CLIENT_SECRET", "your_secret_key")
-CUSTOMER_CODE = os.getenv("MAERSK_CUSTOMER_CODE", "your_customer_code")
-
-token_manager = MaerskTokenManager(CLIENT_ID, CLIENT_SECRET)
+token_manager = MaerskTokenManager()
 
 @router.get("/health")
 def health():
@@ -35,17 +31,31 @@ def get_container_status(container_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/demurrage/{container_number}")
-def get_demurrage(container_number: str):
+@router.get("/demurrage-detention/{charge_type}")
+def get_demurrage_detention(
+    charge_type: str,
+    billOfLadingNumber: str = Query(..., min_length=9, max_length=9),
+    chargesEndDate: Optional[str] = Query(None)
+):
+    if charge_type not in ["DMR", "DET"]:
+        raise HTTPException(status_code=400, detail="Invalid charge_type. Use 'DMR' or 'DET'.")
+
     url = (
-        f"https://api.maersk.com/demurrage-detention/v1/import"
-        f"?customerCode={CUSTOMER_CODE}&containerNumber={container_number}"
+        f"https://api.maersk.com/shipping-charges/import/{charge_type}"
+        f"?billOfLadingNumber={billOfLadingNumber}"
+        f"&carrierCustomerCode={config.MAERSK_CUSTOMER_CODE}"
+        f"&carrierCode={config.MAERSK_CARRIER_CODE}"
     )
+
+    if chargesEndDate:
+        url += f"&chargesEndDate={chargesEndDate}"
+
     try:
         response = requests.get(
             url,
             headers={
                 **token_manager.get_auth_header(),
+                "Consumer-Key": config.MAERSK_CLIENT_ID,
                 "Content-Type": "application/json"
             }
         )
