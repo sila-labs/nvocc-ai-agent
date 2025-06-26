@@ -1,0 +1,27 @@
+AI Agent for NVOCC — Project Overview
+
+Purpose:
+This application is designed to assist Non-Vessel Operating Common Carriers (NVOCCs) by automating and streamlining key operational tasks. The goal is to reduce manual workload, minimize financial losses (e.g., from demurrage fees), and enhance visibility into shipment status through intelligent automation powered by APIs, OCR, and AI-driven insights.
+Currently Implemented Functionalities
+1. OCR for Bills of Lading
+
+    Extracts key fields (e.g., container number, shipper, consignee, port of loading/discharge) from scanned BoL documents using Optical Character Recognition.
+
+    Standardizes extracted data into structured formats for downstream use.
+
+2. Container Tracking + Status Summary
+
+    Integrated with Maersk's Ocean Track & Trace API.
+
+    Allows users to input container numbers and fetch current shipment status.
+
+    Displays latest location, status updates, and estimated arrival in a user-friendly React frontend.
+
+3. Demurrage & Detention Risk Alerts
+
+    Connected to Maersk’s Import Demurrage & Detention API.
+
+    Stores shipment timelines in a local database.
+
+    Analyzes free time vs. port status to compute risk levels and generate proactive alerts for containers nearing demurrage.
+
